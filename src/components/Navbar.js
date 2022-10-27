@@ -37,6 +37,7 @@ const Navbar=(props)=>{
                     <input className="form-check-input" type="checkbox" role="switch" onClick={func} id="flexSwitchCheckDefault"/>
                     <label className="form-check-label darkbg" htmlFor="flexSwitchCheckDefault" style={swst}>Enable Dark Mode</label>
                   </div>
+        <Link className={`nav-link ${location.pathname==="/profile"?"active":""}`} to="/profile">Profile</Link>
        </div>
       </div>
            </nav>
