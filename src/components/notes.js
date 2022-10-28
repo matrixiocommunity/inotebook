@@ -8,6 +8,7 @@ const Notes = (props) => {
 
   //? refs
   const launchdemo = useRef(null);
+  const launchAddNote = useRef(null);
 
   //? Variables
   let { md, tgst, searchText } = props;
@@ -89,25 +90,55 @@ const Notes = (props) => {
           </div>
         </div>
       </div>
-      <div className="container my-3">
-        <h2 className="my-3" style={tgst}>Add Notes</h2>
-        <div className="form-floating mb-3">
-          <input type="text" className="form-control" name="title" id="title" value={note.title} onChange={handlechange} minLength={5} required />
-          <label htmlFor="floatingInput" style={{ color: "black" }}>Title</label>
+
+
+      <div className="modal fade" id="addNoteModal" aria-labelledby="addNoteLableLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h2 className="my-3 modal-title" id="addNoteLabelLabel" style={tgst}>Add New Note</h2>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <div className="form-floating mb-3">
+                <input type="text" className="form-control" name="title" id="title" value={note.title} onChange={handlechange} minLength={5} required />
+                <label htmlFor="floatingInput" style={{ color: "black" }}>Title</label>
+              </div>
+              <div className="form-floating">
+                <input type="text" className="form-control" name="discription" id="discription" value={note.discription} onChange={handlechange} minLength={5} required />
+                <label htmlFor="floatingPassword" style={{ color: "black" }}>Description</label>
+              </div>
+              <div className="form-floating my-3">
+                <input type="text" className="form-control" name="tag" id="tag" value={note.tag} onChange={handlechange} />
+                <label htmlFor="floatingPassword" style={{ color: "black" }}>Tag</label>
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button type="submit" disabled={note.title.length <= 5 || note.discription.length <= 5} className="btn btn-primary my-3" onClick={handleclick}>Add Note</button>
+            </div>
+          </div>
         </div>
-        <div className="form-floating">
-          <input type="text" className="form-control" name="discription" id="discription" value={note.discription} onChange={handlechange} minLength={5} required />
-          <label htmlFor="floatingPassword" style={{ color: "black" }}>discription</label>
-        </div>
-        <div className="form-floating my-3">
-          <input type="text" className="form-control" name="tag" id="tag" value={note.tag} onChange={handlechange} />
-          <label htmlFor="floatingPassword" style={{ color: "black" }}>Tag</label>
-        </div>
-        <button type="submit" disabled={note.title.length <= 5 || note.discription.length <= 5} className="btn btn-primary my-3" onClick={handleclick}>Add Note</button>
       </div>
+
       <div className="container my-3">
-        <h2 className="my-3" style={tgst}>Your Notes</h2>
-        <div className="row">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+          <h2 className="my-3" style={tgst}>Your Notes</h2>
+          <button onClick={() => launchAddNote.current.click()} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNoteModal" ref={launchAddNote}>
+            Create New Note
+          </button>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            gap: '1rem',
+            flexWrap: 'wrap'
+          }}
+          className="row">
           {notes
             .filter((item) => {
               if (item.title.includes(searchText) || item.discription.includes(searchText) || item.tag.includes(searchText))
@@ -120,7 +151,6 @@ const Notes = (props) => {
 
         </div>
       </div>
-
     </div>
   )
 }
