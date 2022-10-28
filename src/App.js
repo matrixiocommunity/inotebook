@@ -11,6 +11,7 @@ import {
   Route,
 } from "react-router-dom";
 import Notestate from './context/notes/notestate';
+import { Profile } from './components/Profile';
 
 
 
@@ -63,6 +64,7 @@ function App() {
             <Route exact path="/home" element={<Home md={mode} swst={switchst} func={togglecolor} tgst={togglestyle} />}></Route>
             <Route exact path="/contact" element={<Contact md={mode} swst={switchst} func={togglecolor} tgst={togglestyle} />}></Route>
             <Route exact path="/about" element={<About md={mode} swst={switchst} func={togglecolor} tgst={togglestyle} />}></Route>
+            <Route exact path="/profile" element={<Profile md={mode} swst={switchst} func={togglecolor} tgst={togglestyle} />}></Route>
           </Routes>
         </Router>
       </Notestate>

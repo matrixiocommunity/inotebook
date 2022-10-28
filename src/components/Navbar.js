@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { FaUserCircle } from 'react-icons/fa'
 import {
   Link
 } from "react-router-dom";
@@ -10,7 +11,7 @@ const Navbar = (props) => {
     console.log(location.pathname);
   }, [location]);
 
-  let { swst, md, func, seearhText, setSearchText } = props;
+  let { swst, md, func, setSearchText } = props;
 
   return (
     <div>
@@ -40,6 +41,9 @@ const Navbar = (props) => {
               <input className="form-check-input" type="checkbox" role="switch" onClick={func} id="flexSwitchCheckDefault" />
               <label className="form-check-label darkbg" htmlFor="flexSwitchCheckDefault" style={swst}>Enable Dark Mode</label>
             </div>
+            <Link className={`nav-link ${location.pathname === "/profile" ? "active" : ""}`} to="/profile">
+              <FaUserCircle size={30} />
+            </Link>
           </div>
         </div>
       </nav>
